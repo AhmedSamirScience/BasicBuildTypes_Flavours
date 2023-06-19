@@ -1,0 +1,143 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.khales.gradle2'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.khales.gradle2"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    /**
+     * - sure you now that the release build is for production
+     * - debug build is for testing
+     */
+
+    /**
+     * how to achieve it from tabs above:
+     * 1- Build
+     * 2- Edit build types
+     * 3- Now you can work on build types
+     */
+
+
+
+
+
+
+    buildTypes {
+
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            /**
+             * enta momkn ttla3 2 apk b 2 package names mokhtalefa (Production, Testing)
+             * w khoud balak ht3'yaro mn application ID Suffix ely btgebo mn el tabs wana 2ayel tgebo ezai
+             * khoud balak ely enta ktbto fl Suffix howa byzed 3ala el package name y3ni law el package name
+             * asmha com.android.application w ktbt fl suffix .debuggg fa hyb2a -> (com.android.application.debuggg)
+             */
+            applicationIdSuffix '.debuggg'
+
+            /**
+             * law enta 3ayez t3mel res (file) le kol build type ht3mel kda
+             * 1- t7awel el android le project
+             * 2- w tegi 3and src (right click)
+             * 3- w tkhtar directory
+             * 4- w tktb res htla2i hygelk 7agat leha 3laka bl debug (debug\res)
+             * 5- enta kda b2a m3ak res file kamel lel debug version (Strings, Values, and so on)
+             */
+
+            /**
+             * note: khoud balak law 3ayez t3mel run w t-switch mabeen build types ht3mel kda
+             * 1- from tabs above choose Build
+             * 2- select build variant
+             */
+        }
+
+
+
+
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+
+    /**
+     * hna b2a hntklem 3ala flavor tyb eh howa el flavor .... el flavor da byt3mel le kol vbuild type y3ni t3ala afhmk
+     * law 3ayez release free w wa7da paid (pro) 7rfaian howa da ely ht3mlo aw el flavours btostkhdm fe kda
+     */
+
+    /**
+     * ezai n3mel flavour
+     * 1- build (from tabs)
+     * 2- edit flavour
+     * 3- add flavor dimension (da lazem t3mlo abl mt-add flavour
+     * 4- w mn gowa el flavour dimension b2a bt3mel right click w t3mel add le product flavour w hnsmi wa7ed free w el tani paid (pro) w yb2a kda 3mlna mwdo3 el flavours
+     *
+     * note: khoud balak lama tegi b2a t-select flavor w el t3mel specification btre2a mo3iana momkn t3'yar el suffix name w 7ta momkn tl3ab lel flavour da bas lel
+     * min SDK w fe options kter wenta el mfrod btkhtra according lel enta mtfe2 m3a el client 3aleha.
+     */
+
+    /**
+     * khoud balak absat example enk momkn t3mel free w paid (pro) 3lshan maslan release feha ads w el tania mafehash khales
+     */
+
+    /**
+     * law enta 3ayez t3mel res (file) le kol flavour type ht3mel kda zayaha zai lma bt3mel fl build types
+     * 1- t7awel el android le project
+     * 2- w tegi 3and src (right click)
+     * 3- w tkhtar directory
+     * 4- w tktb res htla2i hygelk 7agat leha 3laka bl debug (free\res) w khoud balak lazem ykon asm el flavour free 3lshan yzhrlk
+     * 5- enta kda b2a m3ak res file kamel lel debug version (Strings, Values, and so on)
+     */
+
+    /**
+     * mtnsash yasta mwdo3 enk wenta bt-select el flavors 3lshan wenta bt-run
+     */
+
+    flavorDimensions 'ProductTypes'
+    productFlavors {
+        free {
+            dimension 'ProductTypes'
+            applicationIdSuffix '.free'
+            //buildConfigField "String", "BACKEND_HOST", '"www.paid.com"' law 7bet t3mel el mwdo3 da le kol flavor
+
+        }
+        pro {
+            dimension 'ProductTypes'
+            applicationIdSuffix '.pro'
+            //buildConfigField "String", "BACKEND_HOST", '"www.paid.com"' law 7bet t3mel el mwdo3 da le kol flavor
+
+        }
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
